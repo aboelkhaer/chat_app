@@ -2,10 +2,12 @@ import 'package:chat2/helper/helper_functions.dart';
 import 'package:chat2/screens/chat_room_screen.dart';
 import 'package:chat2/services/auth.dart';
 import 'package:chat2/services/database.dart';
+import 'package:chat2/utilites/rounded_button.dart';
 import 'package:chat2/utilites/texts.dart';
 import 'package:chat2/widgets/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lottie/lottie.dart';
 
 class SignUp extends StatefulWidget {
   final Function toggle;
@@ -47,137 +49,114 @@ class _SignUpState extends State<SignUp> {
                 child: CircularProgressIndicator(),
               ),
             )
-          : Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Stack(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 150,
-                              width: 150,
-                              child: Image(
-                                image:
-                                    ExactAssetImage('assets/images/logo.png'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Transform.translate(
-                              offset: Offset(0, -10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      children: <TextSpan>[
-                                        textSpanMarkTitle('< '),
-                                        textSpanTitle('Aboelkhaer '),
-                                        textSpanTitle('Fadel'),
-                                        textSpanMarkTitle(' />'),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'Enter name please';
-                                } else if (value.length < 2) {
-                                  return 'Minmum characters is 2';
-                                }
-                                return null;
-                              },
-                              controller: _userNameController,
-                              style: textStyle(),
-                              decoration: textFieldInputDecoration(
-                                  lableText: 'user name',
-                                  icon: Icon(Icons.person)),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            TextFormField(
-                              validator: (value) {
-                                return RegExp(
-                                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                                        .hasMatch(value)
-                                    ? null
-                                    : 'Please enter a valid email';
-                              },
-                              controller: _userEmailController,
-                              style: textStyle(),
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: textFieldInputDecoration(
-                                  lableText: 'email', icon: Icon(Icons.email)),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            TextFormField(
-                              controller: _passwordNameController,
-                              validator: (value) {
-                                return value.length > 5
-                                    ? null
-                                    : 'Please provide password 5+ character';
-                              },
-                              style: textStyle(),
-                              obscureText: true,
-                              decoration: textFieldInputDecoration(
-                                  lableText: 'password',
-                                  icon: Icon(Icons.lock)),
-                            ),
-                            SizedBox(
-                              height: 50,
-                            ),
-                            _myButton(),
-                          ],
-                        ),
+          : Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bg.png"),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Lottie.asset('assets/icons/chat.json'),
                       ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Already have account? ',
-                          style: textStyle(),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            widget.toggle();
-                          },
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
-                            ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Enter name please';
+                                  } else if (value.length < 2) {
+                                    return 'Minmum characters is 2';
+                                  }
+                                  return null;
+                                },
+                                controller: _userNameController,
+                                style: textStyle(),
+                                decoration: textFieldInputDecoration(
+                                    lableText: 'user name',
+                                    icon: Icon(Icons.person)),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              TextFormField(
+                                validator: (value) {
+                                  return RegExp(
+                                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                          .hasMatch(value)
+                                      ? null
+                                      : 'Please enter a valid email';
+                                },
+                                controller: _userEmailController,
+                                style: textStyle(),
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: textFieldInputDecoration(
+                                    lableText: 'email',
+                                    icon: Icon(Icons.email)),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              TextFormField(
+                                controller: _passwordNameController,
+                                validator: (value) {
+                                  return value.length > 5
+                                      ? null
+                                      : 'Please provide password 5+ character';
+                                },
+                                style: textStyle(),
+                                obscureText: true,
+                                decoration: textFieldInputDecoration(
+                                    lableText: 'password',
+                                    icon: Icon(Icons.lock)),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              _myButton(),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 50),
-                  ],
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already have account? ',
+                            style: textStyle(),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              widget.toggle();
+                            },
+                            child: Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -185,37 +164,13 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget _myButton() {
-    return InkWell(
-      onTap: () {
+    return RoundedButton(
+      text: "Sign up",
+      textColor: Colors.white,
+      color: Colors.grey[700],
+      press: () {
         _signUp();
       },
-      child: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width * 0.5,
-        decoration: BoxDecoration(
-          color: Color(0xFFDEE7F6),
-          shape: BoxShape.rectangle,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black26,
-                offset: Offset(4.0, 4.0),
-                blurRadius: 15,
-                spreadRadius: 1),
-            BoxShadow(
-                color: Colors.white,
-                offset: Offset(-4.0, -4.0),
-                blurRadius: 8,
-                spreadRadius: 1),
-          ],
-        ),
-        child: Container(
-          alignment: Alignment.center,
-          child: Text(
-            'Sign up',
-            style: TextStyle(color: Colors.grey[800]),
-          ),
-        ),
-      ),
     );
   }
 

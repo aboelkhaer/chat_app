@@ -73,14 +73,6 @@ class _SearchScreenState extends State<SearchScreen> {
                           fontSize: 17,
                         ),
                       ),
-                      // Text(
-                      //   userEmail,
-                      // style: TextStyle(
-                      //   color: Colors.blue,
-                      //   fontSize: 16,
-                      //   decoration: TextDecoration.underline,
-                      // ),
-                      // ),
                       GestureDetector(
                         onTap: () {
                           Clipboard.setData(ClipboardData(text: userEmail));
@@ -166,7 +158,7 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFFDEE7F6),
+                // color: Colors.lime,
                 shape: BoxShape.rectangle,
                 boxShadow: [
                   BoxShadow(
@@ -185,16 +177,35 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Row(
                 children: [
                   Expanded(
-                    child: TextFormField(
-                      controller: _searchController,
-                      style: TextStyle(
-                        color: Colors.black,
+                    // child: TextFormField(
+                    //   controller: _searchController,
+                    //   style: TextStyle(
+                    //     color: Colors.black,
+                    //   ),
+                    //   decoration: InputDecoration(
+                    //     border: InputBorder.none,
+                    //     hintText: 'Search username...',
+                    //     hintStyle: TextStyle(
+                    //       color: Colors.grey,
+                    //     ),
+                    //   ),
+                    // ),
+
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        borderRadius: BorderRadius.circular(29),
                       ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Search username...',
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
+                      child: TextField(
+                        controller: _searchController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          hintText: 'Search username...',
+                          border: InputBorder.none,
                         ),
                       ),
                     ),
@@ -213,7 +224,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       icon: Icon(
                         Icons.search,
                         size: 30,
-                        color: Colors.grey,
+                        color: Colors.blueAccent,
                       ),
                       onPressed: () {
                         initialSearch();

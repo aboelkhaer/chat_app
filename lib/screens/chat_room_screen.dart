@@ -71,7 +71,7 @@ class _ChateRomeState extends State<ChateRome> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: ExactAssetImage('assets/images/logo2.png'),
+                  image: ExactAssetImage('assets/images/vector1.png'),
                 ),
               ),
             ),
